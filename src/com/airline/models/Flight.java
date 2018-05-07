@@ -2,6 +2,7 @@ package com.airline.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -23,6 +24,10 @@ public class Flight implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	@OneToMany(mappedBy="flightForPilot")
+	private List<Pilot> pilots;
+	
+	
 	@Enumerated(EnumType.STRING)
 	private FlightDestinations flightOrigin;
 
@@ -37,6 +42,15 @@ public class Flight implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "airplane_fk")
 	private Airplane airplaneDetails;
+
+	
+	public List<Pilot> getPilots() {
+		return pilots;
+	}
+
+	public void setPilots(List<Pilot> pilots) {
+		this.pilots = pilots;
+	}
 
 	public Integer getId() {
 		return id;
@@ -88,8 +102,11 @@ public class Flight implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Flight [id=" + id + ", flightOrigin=" + flightOrigin + ", flightDestination=" + flightDestination
-				+ ", price=" + price + ", flightTime=" + flightTime + "]";
+		return "Flight [id=" + id + ", pilots=" + pilots + ", flightOrigin=" + flightOrigin + ", flightDestination="
+				+ flightDestination + ", price=" + price + ", flightTime=" + flightTime + ", airplaneDetails="
+				+ airplaneDetails + "]";
 	}
+
+	
 
 }
