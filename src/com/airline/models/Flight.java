@@ -10,6 +10,8 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Flight
  *
  */
+
+@NamedQuery(name="flight_findId", query="SELECT f FROM Flight f WHERE f.id=:id")
 @Entity
 
 public class Flight implements Serializable {
